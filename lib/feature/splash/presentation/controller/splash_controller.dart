@@ -1,0 +1,19 @@
+import 'package:point_x/feature/splash/presentation/state/splash_state.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'splash_controller.g.dart';
+
+@riverpod
+class SplashController extends _$SplashController {
+  @override
+  SplashState build() {
+    Future(() => _initialData());
+    return const SplashState.initial();
+  }
+
+  Future<void> _initialData() async {
+    await Future.delayed(Duration(seconds: 5));
+
+    state = SplashState.success();
+  }
+}
