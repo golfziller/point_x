@@ -1,11 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:point_x/feature/product/presentation/detail/controller/product_detail_controller.dart';
 import 'package:point_x/feature/product/presentation/detail/state/product_detail_state.dart';
-import 'package:point_x/feature/product/presentation/detail/widgets/skelton_load.dart';
+import 'package:point_x/shared/widgets/error/error_try_again.dart';
 
 class ProductDetailScreen extends HookConsumerWidget {
   final String id;
@@ -13,15 +12,9 @@ class ProductDetailScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(productDetailControllerProvider);
-    useEffect(() {
-      Future.microtask(() {
-        ref.read(productDetailControllerProvider.notifier).initial(id);
-      });
-      return null; // cleanup function
-    }, []);
+    final state = ref.watch(productDetailControllerProvider(id));
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
+      backgroundColor: Theme.of(context).colorScheme.onPrimary,
       appBar: AppBar(
         title: Text(
           'Product Detail',
@@ -32,17 +25,21 @@ class ProductDetailScreen extends HookConsumerWidget {
             context,
           ).colorScheme.onSecondaryContainer, // สีลูกศร back
         ),
-        backgroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
+        backgroundColor: Theme.of(context).colorScheme.onPrimary,
       ),
       body: state.when(
-        error: () => Center(
-          child: Text("something went wrong\t Can Improve UI try again here"),
-        ),
+        error: () => ErrorTryAgain(onTryAgain: () => {}),
         initial: () => SizedBox(),
         initialized: (products) => Column(
           children: [
             CarouselSlider(
-              options: CarouselOptions(height: 200.0),
+              options: CarouselOptions(
+                height: 200.0,
+                aspectRatio: 0.5,
+                autoPlay: true,
+                viewportFraction: .5,
+                enlargeCenterPage: true,
+              ),
               items: products.images.map((i) {
                 return Builder(
                   builder: (BuildContext context) {
@@ -80,7 +77,7 @@ class ProductDetailScreen extends HookConsumerWidget {
             ),
           ],
         ),
-        loading: () => SkeltonLoad(),
+        loading: () => Center(child: CircularProgressIndicator()),
       ),
     );
   }

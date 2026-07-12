@@ -7,11 +7,12 @@ part 'product_list_state.freezed.dart';
 @freezed
 abstract class ProductListState with _$ProductListState {
   const factory ProductListState.initial() = _ProductListInitial;
+  const factory ProductListState.error() = _ProductListError;
 
   const factory ProductListState.initialized({
     required ProductListData data,
     @Default([]) List<ProductCategory> productCategories,
-    String? currentSlugCategory,
+    ProductCategory? currentSelectedCategory,
   }) = _ProductListInitialized;
 }
 

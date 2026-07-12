@@ -8,12 +8,12 @@ class CategoriesList extends ConsumerWidget {
   const CategoriesList({
     super.key,
     required this.categoriesList,
-    required this.currentSlug,
+    required this.currentSelectedCategory,
     required this.onTap,
   });
   final List<ProductCategory> categoriesList;
-  final String? currentSlug;
-  final Function(String) onTap;
+  final ProductCategory? currentSelectedCategory;
+  final Function(ProductCategory) onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,6 +29,13 @@ class CategoriesList extends ConsumerWidget {
                 context,
               ).textTheme.titleSmall!.copyWith(fontWeight: FontWeight.bold),
             ),
+            Text(
+              currentSelectedCategory?.name ?? '',
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
           ],
         ),
         verticalSpaceTiny,
@@ -43,9 +50,11 @@ class CategoriesList extends ConsumerWidget {
               return Row(
                 children: [
                   CardCategory(
-                    selected: currentSlug == category.slug,
+                    selected:
+                        currentSelectedCategory?.slug != null &&
+                        currentSelectedCategory?.slug == category.slug,
                     productCategory: category,
-                    onTap: () => onTap(category.slug),
+                    onTap: () => onTap(category),
                   ),
 
                   horizontalSpaceMedium,

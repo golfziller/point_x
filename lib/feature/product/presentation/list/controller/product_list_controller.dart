@@ -19,8 +19,8 @@ class ProductListController extends _$ProductListController {
 
   ProductListData? get _currentData =>
       state.maybeMap(initialized: (s) => s.data, orElse: () => null);
-  String? get _currentSelectedCategory => state.maybeMap(
-    initialized: (s) => s.currentSlugCategory,
+  ProductCategory? get _currentSelectedCategory => state.maybeMap(
+    initialized: (s) => s.currentSelectedCategory,
     orElse: () => null,
   );
 
@@ -47,13 +47,16 @@ class ProductListController extends _$ProductListController {
       _loadCategories(),
       _loadProductAll(),
     ]);
-    if (listCategory != null && productData != null) {
+    //อนุญาติให้แสดงโปรดักได้เผื่อ กรณี category พัง
+    if (productData != null) {
       state = ProductListState.initialized(
         data: productData as ProductListData,
-        productCategories: listCategory as List<ProductCategory>,
+        productCategories: listCategory != null
+            ? listCategory as List<ProductCategory>
+            : [],
       );
     } else {
-      //TODO: handle state error
+      state = ProductListState.error();
     }
   }
 
@@ -69,14 +72,21 @@ class ProductListController extends _$ProductListController {
     }
   }
 
-  void onSelectedCategory(String slug) {
+  Future<void> onSelectedCategory(ProductCategory pdCategory) async {
     state = state.maybeMap(
       orElse: () => state,
       initialized: (data) => data.copyWith(
-        currentSlugCategory: slug == data.currentSlugCategory ? null : slug,
+        currentSelectedCategory:
+            pdCategory.slug == data.currentSelectedCategory?.slug
+            ? null
+            : pdCategory,
       ),
     );
-    _loadProductByCategory();
+    if (_currentSelectedCategory == null) {
+      await fetchProductAll();
+    } else {
+      await _loadProductByCategory();
+    }
   }
 
   Future<List<ProductCategory>?> _loadCategories() async {
@@ -109,7 +119,7 @@ class ProductListController extends _$ProductListController {
 
     final res = await ref.read(
       loadProductByCategoryUseCaseProvider(
-        _currentSelectedCategory!,
+        _currentSelectedCategory!.slug,
         ProductQuery(skip: skip, limit: data.limit),
       ).future,
     );

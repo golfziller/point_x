@@ -10,23 +10,30 @@ part of 'product_detail_controller.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(ProductDetailController)
-final productDetailControllerProvider = ProductDetailControllerProvider._();
+final productDetailControllerProvider = ProductDetailControllerFamily._();
 
 final class ProductDetailControllerProvider
     extends $NotifierProvider<ProductDetailController, ProductDetailState> {
-  ProductDetailControllerProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'productDetailControllerProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
+  ProductDetailControllerProvider._({
+    required ProductDetailControllerFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'productDetailControllerProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
 
   @override
   String debugGetCreateSourceHash() => _$productDetailControllerHash();
+
+  @override
+  String toString() {
+    return r'productDetailControllerProvider'
+        ''
+        '($argument)';
+  }
 
   @$internal
   @override
@@ -39,13 +46,52 @@ final class ProductDetailControllerProvider
       providerOverride: $SyncValueProvider<ProductDetailState>(value),
     );
   }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ProductDetailControllerProvider &&
+        other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
 }
 
 String _$productDetailControllerHash() =>
-    r'a32d2c40f0598875364201294c6904f58ddb708e';
+    r'6e3d3d184129d8f10a53bb4e782416ff32dfc6f4';
+
+final class ProductDetailControllerFamily extends $Family
+    with
+        $ClassFamilyOverride<
+          ProductDetailController,
+          ProductDetailState,
+          ProductDetailState,
+          ProductDetailState,
+          String
+        > {
+  ProductDetailControllerFamily._()
+    : super(
+        retry: null,
+        name: r'productDetailControllerProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  ProductDetailControllerProvider call(String id) =>
+      ProductDetailControllerProvider._(argument: id, from: this);
+
+  @override
+  String toString() => r'productDetailControllerProvider';
+}
 
 abstract class _$ProductDetailController extends $Notifier<ProductDetailState> {
-  ProductDetailState build();
+  late final _$args = ref.$arg as String;
+  String get id => _$args;
+
+  ProductDetailState build(String id);
   @$mustCallSuper
   @override
   WhenComplete runBuild() {
@@ -58,6 +104,6 @@ abstract class _$ProductDetailController extends $Notifier<ProductDetailState> {
               Object?,
               Object?
             >;
-    return element.handleCreate(ref, build);
+    return element.handleCreate(ref, () => build(_$args));
   }
 }

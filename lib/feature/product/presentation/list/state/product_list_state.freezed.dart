@@ -55,11 +55,12 @@ extension ProductListStatePatterns on ProductListState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _ProductListInitial value)?  initial,TResult Function( _ProductListInitialized value)?  initialized,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _ProductListInitial value)?  initial,TResult Function( _ProductListError value)?  error,TResult Function( _ProductListInitialized value)?  initialized,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _ProductListInitial() when initial != null:
-return initial(_that);case _ProductListInitialized() when initialized != null:
+return initial(_that);case _ProductListError() when error != null:
+return error(_that);case _ProductListInitialized() when initialized != null:
 return initialized(_that);case _:
   return orElse();
 
@@ -78,11 +79,12 @@ return initialized(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _ProductListInitial value)  initial,required TResult Function( _ProductListInitialized value)  initialized,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _ProductListInitial value)  initial,required TResult Function( _ProductListError value)  error,required TResult Function( _ProductListInitialized value)  initialized,}){
 final _that = this;
 switch (_that) {
 case _ProductListInitial():
-return initial(_that);case _ProductListInitialized():
+return initial(_that);case _ProductListError():
+return error(_that);case _ProductListInitialized():
 return initialized(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -100,11 +102,12 @@ return initialized(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _ProductListInitial value)?  initial,TResult? Function( _ProductListInitialized value)?  initialized,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _ProductListInitial value)?  initial,TResult? Function( _ProductListError value)?  error,TResult? Function( _ProductListInitialized value)?  initialized,}){
 final _that = this;
 switch (_that) {
 case _ProductListInitial() when initial != null:
-return initial(_that);case _ProductListInitialized() when initialized != null:
+return initial(_that);case _ProductListError() when error != null:
+return error(_that);case _ProductListInitialized() when initialized != null:
 return initialized(_that);case _:
   return null;
 
@@ -122,11 +125,12 @@ return initialized(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( ProductListData data,  List<ProductCategory> productCategories,  String? currentSlugCategory)?  initialized,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  error,TResult Function( ProductListData data,  List<ProductCategory> productCategories,  ProductCategory? currentSelectedCategory)?  initialized,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProductListInitial() when initial != null:
-return initial();case _ProductListInitialized() when initialized != null:
-return initialized(_that.data,_that.productCategories,_that.currentSlugCategory);case _:
+return initial();case _ProductListError() when error != null:
+return error();case _ProductListInitialized() when initialized != null:
+return initialized(_that.data,_that.productCategories,_that.currentSelectedCategory);case _:
   return orElse();
 
 }
@@ -144,11 +148,12 @@ return initialized(_that.data,_that.productCategories,_that.currentSlugCategory)
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( ProductListData data,  List<ProductCategory> productCategories,  String? currentSlugCategory)  initialized,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  error,required TResult Function( ProductListData data,  List<ProductCategory> productCategories,  ProductCategory? currentSelectedCategory)  initialized,}) {final _that = this;
 switch (_that) {
 case _ProductListInitial():
-return initial();case _ProductListInitialized():
-return initialized(_that.data,_that.productCategories,_that.currentSlugCategory);case _:
+return initial();case _ProductListError():
+return error();case _ProductListInitialized():
+return initialized(_that.data,_that.productCategories,_that.currentSelectedCategory);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -165,11 +170,12 @@ return initialized(_that.data,_that.productCategories,_that.currentSlugCategory)
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( ProductListData data,  List<ProductCategory> productCategories,  String? currentSlugCategory)?  initialized,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  error,TResult? Function( ProductListData data,  List<ProductCategory> productCategories,  ProductCategory? currentSelectedCategory)?  initialized,}) {final _that = this;
 switch (_that) {
 case _ProductListInitial() when initial != null:
-return initial();case _ProductListInitialized() when initialized != null:
-return initialized(_that.data,_that.productCategories,_that.currentSlugCategory);case _:
+return initial();case _ProductListError() when error != null:
+return error();case _ProductListInitialized() when initialized != null:
+return initialized(_that.data,_that.productCategories,_that.currentSelectedCategory);case _:
   return null;
 
 }
@@ -212,8 +218,40 @@ String toString() {
 /// @nodoc
 
 
+class _ProductListError implements ProductListState {
+  const _ProductListError();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductListError);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'ProductListState.error()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
 class _ProductListInitialized implements ProductListState {
-  const _ProductListInitialized({required this.data, final  List<ProductCategory> productCategories = const [], this.currentSlugCategory}): _productCategories = productCategories;
+  const _ProductListInitialized({required this.data, final  List<ProductCategory> productCategories = const [], this.currentSelectedCategory}): _productCategories = productCategories;
   
 
  final  ProductListData data;
@@ -224,7 +262,7 @@ class _ProductListInitialized implements ProductListState {
   return EqualUnmodifiableListView(_productCategories);
 }
 
- final  String? currentSlugCategory;
+ final  ProductCategory? currentSelectedCategory;
 
 /// Create a copy of ProductListState
 /// with the given fields replaced by the non-null parameter values.
@@ -236,16 +274,16 @@ _$ProductListInitializedCopyWith<_ProductListInitialized> get copyWith => __$Pro
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductListInitialized&&(identical(other.data, data) || other.data == data)&&const DeepCollectionEquality().equals(other._productCategories, _productCategories)&&(identical(other.currentSlugCategory, currentSlugCategory) || other.currentSlugCategory == currentSlugCategory));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductListInitialized&&(identical(other.data, data) || other.data == data)&&const DeepCollectionEquality().equals(other._productCategories, _productCategories)&&(identical(other.currentSelectedCategory, currentSelectedCategory) || other.currentSelectedCategory == currentSelectedCategory));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,data,const DeepCollectionEquality().hash(_productCategories),currentSlugCategory);
+int get hashCode => Object.hash(runtimeType,data,const DeepCollectionEquality().hash(_productCategories),currentSelectedCategory);
 
 @override
 String toString() {
-  return 'ProductListState.initialized(data: $data, productCategories: $productCategories, currentSlugCategory: $currentSlugCategory)';
+  return 'ProductListState.initialized(data: $data, productCategories: $productCategories, currentSelectedCategory: $currentSelectedCategory)';
 }
 
 
@@ -256,11 +294,11 @@ abstract mixin class _$ProductListInitializedCopyWith<$Res> implements $ProductL
   factory _$ProductListInitializedCopyWith(_ProductListInitialized value, $Res Function(_ProductListInitialized) _then) = __$ProductListInitializedCopyWithImpl;
 @useResult
 $Res call({
- ProductListData data, List<ProductCategory> productCategories, String? currentSlugCategory
+ ProductListData data, List<ProductCategory> productCategories, ProductCategory? currentSelectedCategory
 });
 
 
-$ProductListDataCopyWith<$Res> get data;
+$ProductListDataCopyWith<$Res> get data;$ProductCategoryCopyWith<$Res>? get currentSelectedCategory;
 
 }
 /// @nodoc
@@ -273,12 +311,12 @@ class __$ProductListInitializedCopyWithImpl<$Res>
 
 /// Create a copy of ProductListState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? data = null,Object? productCategories = null,Object? currentSlugCategory = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? data = null,Object? productCategories = null,Object? currentSelectedCategory = freezed,}) {
   return _then(_ProductListInitialized(
 data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
 as ProductListData,productCategories: null == productCategories ? _self._productCategories : productCategories // ignore: cast_nullable_to_non_nullable
-as List<ProductCategory>,currentSlugCategory: freezed == currentSlugCategory ? _self.currentSlugCategory : currentSlugCategory // ignore: cast_nullable_to_non_nullable
-as String?,
+as List<ProductCategory>,currentSelectedCategory: freezed == currentSelectedCategory ? _self.currentSelectedCategory : currentSelectedCategory // ignore: cast_nullable_to_non_nullable
+as ProductCategory?,
   ));
 }
 
@@ -290,6 +328,18 @@ $ProductListDataCopyWith<$Res> get data {
   
   return $ProductListDataCopyWith<$Res>(_self.data, (value) {
     return _then(_self.copyWith(data: value));
+  });
+}/// Create a copy of ProductListState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ProductCategoryCopyWith<$Res>? get currentSelectedCategory {
+    if (_self.currentSelectedCategory == null) {
+    return null;
+  }
+
+  return $ProductCategoryCopyWith<$Res>(_self.currentSelectedCategory!, (value) {
+    return _then(_self.copyWith(currentSelectedCategory: value));
   });
 }
 }

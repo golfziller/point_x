@@ -9,7 +9,9 @@ part 'product_detail_controller.g.dart';
 // Improved error handling and validation logic
 @riverpod
 class ProductDetailController extends _$ProductDetailController {
-  ProductDetailState build() {
+  @override
+  ProductDetailState build(String id) {
+    Future.microtask(() => initial(id));
     return const ProductDetailState.initial();
   }
 

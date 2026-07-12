@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:point_x/feature/product/domain/entities/product_category.dart';
@@ -16,12 +17,12 @@ import 'package:point_x/shared/widgets/common/ui_helper.dart';
 class ProductMainList extends HookConsumerWidget {
   final ProductListData productListData;
   final List<ProductCategory> productCategories;
-  final String? currentSlugCategory;
+  final ProductCategory? currentSelectedCategory;
   const ProductMainList({
     super.key,
     required this.productListData,
     required this.productCategories,
-    this.currentSlugCategory,
+    this.currentSelectedCategory,
   });
 
   @override
@@ -78,13 +79,33 @@ class ProductMainList extends HookConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SearchForm(onSearchChange: ctrl.onSearchChange),
-            verticalSpaceMedium,
-            CategoriesList(
-              categoriesList: productCategories,
-              currentSlug: currentSlugCategory,
-              onTap: ctrl.onSelectedCategory,
+            AnimatedSize(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeOutCubic,
+              alignment: Alignment.topCenter,
+              child: currentSelectedCategory == null
+                  ? Animate(
+                      effects: [FadeEffect()],
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SearchForm(onSearchChange: ctrl.onSearchChange),
+                          verticalSpaceMedium,
+                        ],
+                      ),
+                    )
+                  : const SizedBox(height: 0),
             ),
+
+            Animate(
+              effects: [FadeEffect()],
+              child: CategoriesList(
+                categoriesList: productCategories,
+                currentSelectedCategory: currentSelectedCategory,
+                onTap: ctrl.onSelectedCategory,
+              ),
+            ),
+
             verticalSpaceMedium,
             buildbody(),
           ],
