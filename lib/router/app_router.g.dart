@@ -6,7 +6,11 @@ part of 'app_router.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [$splashRoute, $productListRoute];
+List<RouteBase> get $appRoutes => [
+  $splashRoute,
+  $productListRoute,
+  $productDetailRoute,
+];
 
 RouteBase get $splashRoute =>
     GoRouteData.$route(path: '/splash', factory: $SplashRoute._fromState);
@@ -42,6 +46,35 @@ mixin $ProductListRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/product-list');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $productDetailRoute => GoRouteData.$route(
+  path: '/product-detail',
+  factory: $ProductDetailRoute._fromState,
+);
+
+mixin $ProductDetailRoute on GoRouteData {
+  static ProductDetailRoute _fromState(GoRouterState state) =>
+      ProductDetailRoute(id: state.uri.queryParameters['id']!);
+
+  ProductDetailRoute get _self => this as ProductDetailRoute;
+
+  @override
+  String get location =>
+      GoRouteData.$location('/product-detail', queryParams: {'id': _self.id});
 
   @override
   void go(BuildContext context) => context.go(location);

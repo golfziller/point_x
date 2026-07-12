@@ -12,8 +12,7 @@ class SplashController extends _$SplashController {
   }
 
   Future<void> _initialData() async {
-    await Future.delayed(Duration(seconds: 5));
-
+    await Future.delayed(Duration(seconds: 3));
     state = SplashState.success();
   }
 }

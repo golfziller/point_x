@@ -1,0 +1,53 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'api_client.dart';
+
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(ApiClient)
+final apiClientProvider = ApiClientProvider._();
+
+final class ApiClientProvider extends $AsyncNotifierProvider<ApiClient, void> {
+  ApiClientProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'apiClientProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$apiClientHash();
+
+  @$internal
+  @override
+  ApiClient create() => ApiClient();
+}
+
+String _$apiClientHash() => r'4a4a5590bc08f3d89b27fd18342080c20724a488';
+
+abstract class _$ApiClient extends $AsyncNotifier<void> {
+  FutureOr<void> build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<void>, void>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<void>, void>,
+              AsyncValue<void>,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}

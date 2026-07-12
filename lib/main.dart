@@ -5,6 +5,7 @@ import 'package:point_x/core/theme/controller/app_theme_controller.dart';
 import 'package:point_x/router/app_router.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(ProviderScope(child: MainApp()));
 }
 

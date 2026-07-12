@@ -448,6 +448,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      sha256: "1ca20c894b1717686a2319b8548763d812bc0aabdac580420a44c5178c57a867"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.20.3"
   io:
     dependency: transitive
     description:
@@ -480,6 +488,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.12.0"
+  json_serializable:
+    dependency: "direct main"
+    description:
+      name: json_serializable
+      sha256: ffcd10cde35a93b2abbbcc26bd9971f4ca93763e8abe78d855e3c4177797e501
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.14.0"
   leak_tracker:
     dependency: transitive
     description:
