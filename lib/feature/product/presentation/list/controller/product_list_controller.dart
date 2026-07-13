@@ -83,7 +83,6 @@ class ProductListController extends _$ProductListController {
     if (_currentData?.isLoading == true || !ref.mounted) {
       return;
     }
-
     state = state.maybeMap(
       orElse: () => state,
       initialized: (data) => data.copyWith(
@@ -124,7 +123,11 @@ class ProductListController extends _$ProductListController {
 
     final skip = isLoadMore ? productsInfo.skip + productsInfo.limit : 0;
     _updateProductData(
-      (old) => old.copyWith(isLoading: !isLoadMore, isLoadMore: isLoadMore),
+      (old) => old.copyWith(
+        isLoading: !isLoadMore,
+        isLoadMore: isLoadMore,
+        search: null,
+      ),
     );
 
     final res = await ref.read(

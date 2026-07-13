@@ -55,6 +55,7 @@ class ProductMainList extends HookConsumerWidget {
                 return ProductItemCard(
                   product: productListData.products[index],
                   onTab: () {
+                    FocusManager.instance.primaryFocus?.unfocus();
                     ProductDetailRoute(
                       id: '${productListData.products[index].id}',
                     ).push(context);
@@ -72,7 +73,7 @@ class ProductMainList extends HookConsumerWidget {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
-        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Padding(
         padding: const EdgeInsets.all(16),

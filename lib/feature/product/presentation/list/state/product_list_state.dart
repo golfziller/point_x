@@ -28,7 +28,6 @@ abstract class ProductListData with _$ProductListData {
     // @Default(0) int total,
     @Default([]) List<Product> products,
     @Default('asc') String order,
-
     String? search,
   }) = _ProductListData;
 }

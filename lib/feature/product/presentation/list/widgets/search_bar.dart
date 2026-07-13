@@ -52,10 +52,10 @@ class SearchForm extends StatelessWidget {
                 Expanded(
                   child: TextFormField(
                     onChanged: onSearchChange,
+
                     decoration: InputDecoration(
                       hintText: ProductConstant.hintSearch,
                       fillColor: Theme.of(context).colorScheme.onPrimary,
-
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(radiusBorder),
                         borderSide: BorderSide.none,
