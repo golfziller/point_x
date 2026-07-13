@@ -68,7 +68,7 @@ final class LoadProductDetailUseCaseProvider
 }
 
 String _$loadProductDetailUseCaseHash() =>
-    r'72596a18fd66924a9fc6cd71ae187ba89af28e1a';
+    r'17b1ab737bf60fb7c01f940687c6565c046f1593';
 
 final class LoadProductDetailUseCaseFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<Either<Failure, Product>>, String> {

@@ -10,7 +10,7 @@ _ProductGetAllRequest _$ProductGetAllRequestFromJson(
   Map<String, dynamic> json,
 ) => _ProductGetAllRequest(
   order: json['order'] as String? ?? "asc",
-  limit: (json['limit'] as num?)?.toInt() ?? 10,
+  limit: (json['limit'] as num?)?.toInt() ?? 20,
   skip: (json['skip'] as num).toInt(),
   sortBy: json['sortBy'] as String? ?? 'title',
   select:

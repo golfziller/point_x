@@ -20,6 +20,7 @@ Future<Either<Failure, Product>> loadProductDetailUseCase(
     final res = await ref.read(productRepositoryProvider).getProductDetail(id);
     return right(res);
   } catch (e) {
+    link.close();
     return left(Failure(message: e.toString()));
   }
 }

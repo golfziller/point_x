@@ -16,17 +16,18 @@ abstract class ProductListState with _$ProductListState {
   }) = _ProductListInitialized;
 }
 
-// สร้าง Class สำหรับเก็บ Data ทั้งหมด
 @freezed
 abstract class ProductListData with _$ProductListData {
   const factory ProductListData({
     @Default(false) bool isLoading,
     @Default(false) bool isLoadMore,
-    @Default(0) int skip,
-    @Default(10) int limit,
-    @Default(0) int total,
-    @Default('asc') String order,
+    required ProductGetAllList productsInfo,
+
+    // @Default(0) int skip,
+    // @Default(20) int limit,
+    // @Default(0) int total,
     @Default([]) List<Product> products,
+    @Default('asc') String order,
 
     String? search,
   }) = _ProductListData;

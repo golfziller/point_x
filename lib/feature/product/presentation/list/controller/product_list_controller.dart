@@ -1,3 +1,4 @@
+import 'package:point_x/feature/product/domain/entities/product.dart';
 import 'package:point_x/feature/product/domain/entities/product_category.dart';
 import 'package:point_x/feature/product/domain/entities/product_query.dart';
 import 'package:point_x/feature/product/domain/usecase/load_product_by_category_usecase.dart';
@@ -28,8 +29,7 @@ class ProductListController extends _$ProductListController {
     ProductListData Function(ProductListData oldData) update,
   ) {
     final data = _currentData;
-    if (data == null) return;
-
+    if (data == null || !ref.mounted) return;
     state = state.maybeMap(
       initialized: (s) => s.copyWith(data: update(data)),
       orElse: () => state,
@@ -43,14 +43,19 @@ class ProductListController extends _$ProductListController {
   }
 
   Future<void> _initialData() async {
-    final [listCategory, productData] = await Future.wait([
+    final [listCategory, productGetAllList] = await Future.wait([
       _loadCategories(),
-      _loadProductAll(),
+      _loadProducts(),
     ]);
+    if (!ref.mounted) return;
     //อนุญาติให้แสดงโปรดักได้เผื่อ กรณี category พัง
-    if (productData != null) {
+    if (productGetAllList != null) {
+      final pdGetAllList = productGetAllList as ProductGetAllList;
       state = ProductListState.initialized(
-        data: productData as ProductListData,
+        data: ProductListData(
+          productsInfo: pdGetAllList,
+          products: productGetAllList.products,
+        ),
         productCategories: listCategory != null
             ? listCategory as List<ProductCategory>
             : [],
@@ -61,18 +66,24 @@ class ProductListController extends _$ProductListController {
   }
 
   Future<void> fetchProductAll() async {
-    final productData = await _loadProductAll();
-    if (productData != null) {
-      state = state.maybeMap(
-        orElse: () => state,
-        initialized: (d) {
-          return d.copyWith(data: productData);
-        },
-      );
-    }
+    _updateProductData((o) => o.copyWith(isLoading: true));
+    final result = await _loadProducts();
+    _updateProductData(
+      (o) => result != null
+          ? o.copyWith(
+              isLoading: false,
+              productsInfo: result,
+              products: result.products,
+            )
+          : o.copyWith(isLoading: false),
+    );
   }
 
   Future<void> onSelectedCategory(ProductCategory pdCategory) async {
+    if (_currentData?.isLoading == true || !ref.mounted) {
+      return;
+    }
+
     state = state.maybeMap(
       orElse: () => state,
       initialized: (data) => data.copyWith(
@@ -82,6 +93,7 @@ class ProductListController extends _$ProductListController {
             : pdCategory,
       ),
     );
+
     if (_currentSelectedCategory == null) {
       await fetchProductAll();
     } else {
@@ -102,25 +114,23 @@ class ProductListController extends _$ProductListController {
     if (_currentSelectedCategory == null) return;
 
     final data = _currentData;
+
     if (data == null) return;
-    if (isLoadMore && (data.products.length >= data.total || data.isLoadMore)) {
+    final productsInfo = data.productsInfo;
+    if (isLoadMore &&
+        (data.products.length >= productsInfo.total || data.isLoadMore)) {
       return;
     }
 
-    final skip = isLoadMore ? data.skip + data.limit : 0;
+    final skip = isLoadMore ? productsInfo.skip + productsInfo.limit : 0;
     _updateProductData(
-      (old) => old.copyWith(
-        isLoading: !isLoadMore,
-        isLoadMore: isLoadMore,
-        skip: skip,
-        total: isLoadMore ? old.total : 0,
-      ),
+      (old) => old.copyWith(isLoading: !isLoadMore, isLoadMore: isLoadMore),
     );
 
     final res = await ref.read(
       loadProductByCategoryUseCaseProvider(
         _currentSelectedCategory!.slug,
-        ProductQuery(skip: skip, limit: data.limit),
+        ProductQuery(skip: skip),
       ).future,
     );
 
@@ -132,39 +142,31 @@ class ProductListController extends _$ProductListController {
     }
 
     final result = res.getValueSuccess();
-    final products = isLoadMore
-        ? [...data.products, ...result.products]
-        : result.products;
 
-    _updateProductData(
-      (o) => o.copyWith(
+    _updateProductData((o) {
+      final products = isLoadMore
+          ? [...o.products, ...result.products]
+          : result.products;
+      return o.copyWith(
         products: products,
+        productsInfo: result,
         isLoading: false,
         isLoadMore: false,
-        total: result.total,
-        skip: skip,
-      ),
-    );
+      );
+    });
   }
 
-  Future<ProductListData?> _fetchProductList(ProductQuery query) async {
-    final res = await ref.read(loadProductListUseCaseProvider(query).future);
+  Future<ProductGetAllList?> _loadProducts({ProductQuery? query}) async {
+    final res = await ref.read(
+      loadProductListUseCaseProvider(query ?? ProductQuery()).future,
+    );
 
     if (!res.isSuccess) {
       return null;
     }
 
     final result = res.getValueSuccess();
-    return ProductListData(
-      products: result.products,
-      isLoading: false,
-      total: result.total,
-    );
-  }
-
-  Future<ProductListData?> _loadProductAll() async {
-    final data = ProductListData();
-    return _fetchProductList(ProductQuery(skip: data.skip, limit: data.limit));
+    return result;
   }
 
   Future<void> onLoadMore() async {
@@ -183,25 +185,23 @@ class ProductListController extends _$ProductListController {
   Future<void> _searchProducts({bool loadMore = false}) async {
     final data = _currentData;
     if (data == null) return;
-    if (loadMore && (data.products.length >= data.total || data.isLoadMore)) {
+    if (loadMore &&
+        (data.products.length >= data.productsInfo.total || data.isLoadMore)) {
       return;
     }
 
     final query = data.search?.trim() ?? '';
-    final skip = loadMore ? data.skip + data.limit : 0;
+    final skip = loadMore
+        ? data.productsInfo.skip + data.productsInfo.limit
+        : 0;
 
     _updateProductData(
-      (old) => old.copyWith(
-        isLoading: !loadMore,
-        isLoadMore: loadMore,
-        skip: skip,
-        total: loadMore ? old.total : 0,
-      ),
+      (old) => old.copyWith(isLoading: !loadMore, isLoadMore: loadMore),
     );
 
     final res = await ref.read(
       searchProductListUseCaseProvider(
-        ProductQuery(skip: skip, limit: data.limit, q: query),
+        ProductQuery(skip: skip, q: query),
       ).future,
     );
 
@@ -221,8 +221,7 @@ class ProductListController extends _$ProductListController {
         products: products,
         isLoading: false,
         isLoadMore: false,
-        total: result.total,
-        skip: skip,
+        productsInfo: result,
       );
     });
   }
@@ -240,27 +239,29 @@ class ProductListController extends _$ProductListController {
     } else if (_currentSelectedCategory != null) {
       await _loadProductByCategory();
     } else {
-      final productData = await _loadProductAll();
-      if (productData != null) {
-        _updateProductData((o) => o.copyWith(products: productData.products));
+      final result = await _loadProducts();
+      if (result != null) {
+        _updateProductData(
+          (o) => o.copyWith(products: result.products, productsInfo: result),
+        );
       }
     }
   }
 
   Future<void> loadProductMore() async {
     final data = _currentData;
-    if (data == null || data.isLoadMore || data.products.length >= data.total) {
+    if (data == null ||
+        data.isLoadMore ||
+        data.products.length >= data.productsInfo.total) {
       return;
     }
 
-    final nextSkip = data.skip + data.limit;
-    _updateProductData((o) => o.copyWith(isLoadMore: true, skip: nextSkip));
+    final nextSkip = data.productsInfo.skip + data.productsInfo.limit;
+    _updateProductData((o) => o.copyWith(isLoadMore: true));
 
-    final productData = await _fetchProductList(
-      ProductQuery(skip: data.skip, limit: data.limit),
-    );
+    final result = await _loadProducts(query: ProductQuery(skip: nextSkip));
 
-    if (productData == null) {
+    if (result == null) {
       _updateProductData((o) => o.copyWith(isLoadMore: false));
       return;
     }
@@ -268,9 +269,8 @@ class ProductListController extends _$ProductListController {
     _updateProductData(
       (o) => o.copyWith(
         isLoadMore: false,
-        products: [...o.products, ...productData.products],
-        total: productData.total,
-        skip: nextSkip,
+        products: [...o.products, ...result.products],
+        productsInfo: result,
       ),
     );
   }

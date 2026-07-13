@@ -210,7 +210,7 @@ return $default(_that.skip,_that.limit,_that.order,_that.sortBy,_that.q);case _:
 
 
 class _ProductQuery implements ProductQuery {
-  const _ProductQuery({this.skip = 0, this.limit = 10, this.order = 'asc', this.sortBy = 'title', this.q = ''});
+  const _ProductQuery({this.skip = 0, this.limit = 20, this.order = 'asc', this.sortBy = 'title', this.q = ''});
   
 
 @override@JsonKey() final  int skip;

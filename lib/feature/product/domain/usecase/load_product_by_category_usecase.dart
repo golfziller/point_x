@@ -17,12 +17,13 @@ Future<Either<Failure, ProductGetAllList>> loadProductByCategoryUseCase(
   ProductQuery query,
 ) async {
   final link = ref.keepAlive();
-  Timer(CacheConfig.productList, link.close);
+  Timer(CacheConfig.productListByCategory, link.close);
   try {
     final repo = ref.read(productRepositoryProvider);
     final res = await repo.getProductsByCategory(slug, query);
     return right(res);
   } catch (e) {
+    link.close();
     return left(Failure(message: e.toString()));
   }
 }

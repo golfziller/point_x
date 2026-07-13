@@ -5,7 +5,7 @@ part 'product_query.freezed.dart';
 abstract class ProductQuery with _$ProductQuery {
   const factory ProductQuery({
     @Default(0) int skip,
-    @Default(10) int limit,
+    @Default(20) int limit,
     @Default('asc') String order,
     @Default('title') String sortBy,
     @Default('') String q,

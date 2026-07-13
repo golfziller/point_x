@@ -1,85 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:point_x/core/constant/product/product_constant.dart';
 import 'package:point_x/shared/widgets/common/ui_helper.dart';
 
 class SearchForm extends StatelessWidget {
   final Function(String) onSearchChange;
   const SearchForm({super.key, required this.onSearchChange});
-  final double _heightInput = 56;
-  final double _radiusBorder = 16;
-  final double _sizeIcon = 24;
 
   @override
   Widget build(BuildContext context) {
+    final double heightInput = 56;
+    final double radiusBorder = 16;
+    final double sizeIcon = 24;
     return Row(
       children: [
         Expanded(
           child: Container(
-            // กำหนดความสูงของความเหมาะสมของ Search bar
-            height: _heightInput,
+            height: heightInput,
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.onPrimary,
-              borderRadius: BorderRadius.circular(
-                _radiusBorder,
-              ), // ความมนของมุมมุม
+              borderRadius: BorderRadius.circular(radiusBorder),
               boxShadow: [
                 BoxShadow(
-                  color: Theme.of(context).colorScheme.onSecondary.withValues(
-                    alpha: 0.1,
-                  ), // เงาบางมากๆ สไตล์ Minimal
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSecondary.withValues(alpha: 0.1),
                   spreadRadius: 1,
                   blurRadius: 10,
-                  offset: const Offset(0, 4), // ดันเงาลงด้านล่างเล็กน้อย
+                  offset: const Offset(0, 4),
                 ),
               ],
             ),
             child: Row(
               children: [
-                // 1. Icon ค้นหาซ้ายสุด
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16),
                   child: Icon(
                     Icons.search_rounded,
                     color: Theme.of(context).colorScheme.onSecondaryFixed,
-                    size: _sizeIcon,
+                    size: sizeIcon,
                   ),
                 ),
 
-                // 2. เส้นแบ่งแนวตั้ง (Vertical Divider)
                 Container(
                   width: 1,
-                  height:
-                      _heightInput / 2, // ปรับความสูงของเส้นคั่นไม่ให้เต็มกรอบ
-                  color: Theme.of(
-                    context,
-                  ).colorScheme.onSecondary, // สีเส้นจางๆ
+                  height: heightInput / 2,
+                  color: Theme.of(context).colorScheme.onSecondary,
                 ),
 
                 horizontalSpaceSmall,
 
-                // 3. ช่องสำหรับพิมพ์ข้อความ (TextField)
                 Expanded(
                   child: TextFormField(
-                    // onSubmitted: (_) => onSubmitted?.call(),
                     onChanged: onSearchChange,
                     decoration: InputDecoration(
-                      hintText: 'Search Your Product',
+                      hintText: ProductConstant.hintSearch,
                       fillColor: Theme.of(context).colorScheme.onPrimary,
 
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                          _radiusBorder,
-                        ), // โค้งตาม parent
-                        borderSide: BorderSide.none, // เอาเส้นขอบออก
+                        borderRadius: BorderRadius.circular(radiusBorder),
+                        borderSide: BorderSide.none,
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                          _radiusBorder,
-                        ), // โค้งตาม parent
-                        borderSide: BorderSide.none, // เอาเส้นขอบออก
+                        borderRadius: BorderRadius.circular(radiusBorder),
+                        borderSide: BorderSide.none,
                       ),
-                      contentPadding: EdgeInsets.only(
-                        bottom: 2,
-                      ), // จัดตำแหน่งให้อยู่กึ่งกลางแนวตั้งพอดี
+                      contentPadding: EdgeInsets.only(bottom: 2),
                     ),
                   ),
                 ),

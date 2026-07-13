@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'product_get_all.dart';
+part of 'product_get_all_response.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,22 +13,22 @@ part of 'product_get_all.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$ProductGetAll {
+mixin _$ProductGetAllResponse {
 
- List<ProductDetail> get products; int get limit; int get skip; int get total;
-/// Create a copy of ProductGetAll
+ List<ProductDetailResponse> get products; int get limit; int get skip; int get total;
+/// Create a copy of ProductGetAllResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$ProductGetAllCopyWith<ProductGetAll> get copyWith => _$ProductGetAllCopyWithImpl<ProductGetAll>(this as ProductGetAll, _$identity);
+$ProductGetAllResponseCopyWith<ProductGetAllResponse> get copyWith => _$ProductGetAllResponseCopyWithImpl<ProductGetAllResponse>(this as ProductGetAllResponse, _$identity);
 
-  /// Serializes this ProductGetAll to a JSON map.
+  /// Serializes this ProductGetAllResponse to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductGetAll&&const DeepCollectionEquality().equals(other.products, products)&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.skip, skip) || other.skip == skip)&&(identical(other.total, total) || other.total == total));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductGetAllResponse&&const DeepCollectionEquality().equals(other.products, products)&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.skip, skip) || other.skip == skip)&&(identical(other.total, total) || other.total == total));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -37,18 +37,18 @@ int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(
 
 @override
 String toString() {
-  return 'ProductGetAll(products: $products, limit: $limit, skip: $skip, total: $total)';
+  return 'ProductGetAllResponse(products: $products, limit: $limit, skip: $skip, total: $total)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $ProductGetAllCopyWith<$Res>  {
-  factory $ProductGetAllCopyWith(ProductGetAll value, $Res Function(ProductGetAll) _then) = _$ProductGetAllCopyWithImpl;
+abstract mixin class $ProductGetAllResponseCopyWith<$Res>  {
+  factory $ProductGetAllResponseCopyWith(ProductGetAllResponse value, $Res Function(ProductGetAllResponse) _then) = _$ProductGetAllResponseCopyWithImpl;
 @useResult
 $Res call({
- List<ProductDetail> products, int limit, int skip, int total
+ List<ProductDetailResponse> products, int limit, int skip, int total
 });
 
 
@@ -56,19 +56,19 @@ $Res call({
 
 }
 /// @nodoc
-class _$ProductGetAllCopyWithImpl<$Res>
-    implements $ProductGetAllCopyWith<$Res> {
-  _$ProductGetAllCopyWithImpl(this._self, this._then);
+class _$ProductGetAllResponseCopyWithImpl<$Res>
+    implements $ProductGetAllResponseCopyWith<$Res> {
+  _$ProductGetAllResponseCopyWithImpl(this._self, this._then);
 
-  final ProductGetAll _self;
-  final $Res Function(ProductGetAll) _then;
+  final ProductGetAllResponse _self;
+  final $Res Function(ProductGetAllResponse) _then;
 
-/// Create a copy of ProductGetAll
+/// Create a copy of ProductGetAllResponse
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? products = null,Object? limit = null,Object? skip = null,Object? total = null,}) {
   return _then(_self.copyWith(
 products: null == products ? _self.products : products // ignore: cast_nullable_to_non_nullable
-as List<ProductDetail>,limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
+as List<ProductDetailResponse>,limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
 as int,skip: null == skip ? _self.skip : skip // ignore: cast_nullable_to_non_nullable
 as int,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
 as int,
@@ -78,8 +78,8 @@ as int,
 }
 
 
-/// Adds pattern-matching-related methods to [ProductGetAll].
-extension ProductGetAllPatterns on ProductGetAll {
+/// Adds pattern-matching-related methods to [ProductGetAllResponse].
+extension ProductGetAllResponsePatterns on ProductGetAllResponse {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -92,10 +92,10 @@ extension ProductGetAllPatterns on ProductGetAll {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ProductGetAll value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ProductGetAllResponse value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _ProductGetAll() when $default != null:
+case _ProductGetAllResponse() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -114,10 +114,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ProductGetAll value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ProductGetAllResponse value)  $default,){
 final _that = this;
 switch (_that) {
-case _ProductGetAll():
+case _ProductGetAllResponse():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -135,10 +135,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ProductGetAll value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ProductGetAllResponse value)?  $default,){
 final _that = this;
 switch (_that) {
-case _ProductGetAll() when $default != null:
+case _ProductGetAllResponse() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -156,9 +156,9 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<ProductDetail> products,  int limit,  int skip,  int total)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<ProductDetailResponse> products,  int limit,  int skip,  int total)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _ProductGetAll() when $default != null:
+case _ProductGetAllResponse() when $default != null:
 return $default(_that.products,_that.limit,_that.skip,_that.total);case _:
   return orElse();
 
@@ -177,9 +177,9 @@ return $default(_that.products,_that.limit,_that.skip,_that.total);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<ProductDetail> products,  int limit,  int skip,  int total)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<ProductDetailResponse> products,  int limit,  int skip,  int total)  $default,) {final _that = this;
 switch (_that) {
-case _ProductGetAll():
+case _ProductGetAllResponse():
 return $default(_that.products,_that.limit,_that.skip,_that.total);case _:
   throw StateError('Unexpected subclass');
 
@@ -197,9 +197,9 @@ return $default(_that.products,_that.limit,_that.skip,_that.total);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<ProductDetail> products,  int limit,  int skip,  int total)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<ProductDetailResponse> products,  int limit,  int skip,  int total)?  $default,) {final _that = this;
 switch (_that) {
-case _ProductGetAll() when $default != null:
+case _ProductGetAllResponse() when $default != null:
 return $default(_that.products,_that.limit,_that.skip,_that.total);case _:
   return null;
 
@@ -211,12 +211,12 @@ return $default(_that.products,_that.limit,_that.skip,_that.total);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _ProductGetAll implements ProductGetAll {
-  const _ProductGetAll({required final  List<ProductDetail> products, required this.limit, required this.skip, required this.total}): _products = products;
-  factory _ProductGetAll.fromJson(Map<String, dynamic> json) => _$ProductGetAllFromJson(json);
+class _ProductGetAllResponse implements ProductGetAllResponse {
+  const _ProductGetAllResponse({required final  List<ProductDetailResponse> products, required this.limit, required this.skip, required this.total}): _products = products;
+  factory _ProductGetAllResponse.fromJson(Map<String, dynamic> json) => _$ProductGetAllResponseFromJson(json);
 
- final  List<ProductDetail> _products;
-@override List<ProductDetail> get products {
+ final  List<ProductDetailResponse> _products;
+@override List<ProductDetailResponse> get products {
   if (_products is EqualUnmodifiableListView) return _products;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_products);
@@ -226,20 +226,20 @@ class _ProductGetAll implements ProductGetAll {
 @override final  int skip;
 @override final  int total;
 
-/// Create a copy of ProductGetAll
+/// Create a copy of ProductGetAllResponse
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$ProductGetAllCopyWith<_ProductGetAll> get copyWith => __$ProductGetAllCopyWithImpl<_ProductGetAll>(this, _$identity);
+_$ProductGetAllResponseCopyWith<_ProductGetAllResponse> get copyWith => __$ProductGetAllResponseCopyWithImpl<_ProductGetAllResponse>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$ProductGetAllToJson(this, );
+  return _$ProductGetAllResponseToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductGetAll&&const DeepCollectionEquality().equals(other._products, _products)&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.skip, skip) || other.skip == skip)&&(identical(other.total, total) || other.total == total));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductGetAllResponse&&const DeepCollectionEquality().equals(other._products, _products)&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.skip, skip) || other.skip == skip)&&(identical(other.total, total) || other.total == total));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -248,18 +248,18 @@ int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(
 
 @override
 String toString() {
-  return 'ProductGetAll(products: $products, limit: $limit, skip: $skip, total: $total)';
+  return 'ProductGetAllResponse(products: $products, limit: $limit, skip: $skip, total: $total)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$ProductGetAllCopyWith<$Res> implements $ProductGetAllCopyWith<$Res> {
-  factory _$ProductGetAllCopyWith(_ProductGetAll value, $Res Function(_ProductGetAll) _then) = __$ProductGetAllCopyWithImpl;
+abstract mixin class _$ProductGetAllResponseCopyWith<$Res> implements $ProductGetAllResponseCopyWith<$Res> {
+  factory _$ProductGetAllResponseCopyWith(_ProductGetAllResponse value, $Res Function(_ProductGetAllResponse) _then) = __$ProductGetAllResponseCopyWithImpl;
 @override @useResult
 $Res call({
- List<ProductDetail> products, int limit, int skip, int total
+ List<ProductDetailResponse> products, int limit, int skip, int total
 });
 
 
@@ -267,19 +267,19 @@ $Res call({
 
 }
 /// @nodoc
-class __$ProductGetAllCopyWithImpl<$Res>
-    implements _$ProductGetAllCopyWith<$Res> {
-  __$ProductGetAllCopyWithImpl(this._self, this._then);
+class __$ProductGetAllResponseCopyWithImpl<$Res>
+    implements _$ProductGetAllResponseCopyWith<$Res> {
+  __$ProductGetAllResponseCopyWithImpl(this._self, this._then);
 
-  final _ProductGetAll _self;
-  final $Res Function(_ProductGetAll) _then;
+  final _ProductGetAllResponse _self;
+  final $Res Function(_ProductGetAllResponse) _then;
 
-/// Create a copy of ProductGetAll
+/// Create a copy of ProductGetAllResponse
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? products = null,Object? limit = null,Object? skip = null,Object? total = null,}) {
-  return _then(_ProductGetAll(
+  return _then(_ProductGetAllResponse(
 products: null == products ? _self._products : products // ignore: cast_nullable_to_non_nullable
-as List<ProductDetail>,limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
+as List<ProductDetailResponse>,limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
 as int,skip: null == skip ? _self.skip : skip // ignore: cast_nullable_to_non_nullable
 as int,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
 as int,

@@ -69,7 +69,7 @@ final class LoadProductByCategoryUseCaseProvider
 }
 
 String _$loadProductByCategoryUseCaseHash() =>
-    r'd871ebba2e9802e5d4e5420a992e855c474f4749';
+    r'41bcb8117d7a4cece671aeca0081250a9841a1e4';
 
 final class LoadProductByCategoryUseCaseFamily extends $Family
     with

@@ -32,7 +32,7 @@ final class ApiClientProvider extends $AsyncNotifierProvider<ApiClient, void> {
   ApiClient create() => ApiClient();
 }
 
-String _$apiClientHash() => r'4a4a5590bc08f3d89b27fd18342080c20724a488';
+String _$apiClientHash() => r'bb00e51c375c15f5bf44c1496d21f48b6baf0919';
 
 abstract class _$ApiClient extends $AsyncNotifier<void> {
   FutureOr<void> build();

@@ -50,4 +50,4 @@ final class LoadProductCategoryUseCaseProvider
 }
 
 String _$loadProductCategoryUseCaseHash() =>
-    r'29f119d357c54644aa1bfa06f4ed65033572aa28';
+    r'7fc2d472774b5fe1e7510210aca8c525e74fd3a9';

@@ -347,7 +347,7 @@ $ProductCategoryCopyWith<$Res>? get currentSelectedCategory {
 /// @nodoc
 mixin _$ProductListData {
 
- bool get isLoading; bool get isLoadMore; int get skip; int get limit; int get total; String get order; List<Product> get products; String? get search;
+ bool get isLoading; bool get isLoadMore; ProductGetAllList get productsInfo; List<Product> get products; String get order; String? get search;
 /// Create a copy of ProductListData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -358,16 +358,16 @@ $ProductListDataCopyWith<ProductListData> get copyWith => _$ProductListDataCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductListData&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isLoadMore, isLoadMore) || other.isLoadMore == isLoadMore)&&(identical(other.skip, skip) || other.skip == skip)&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.total, total) || other.total == total)&&(identical(other.order, order) || other.order == order)&&const DeepCollectionEquality().equals(other.products, products)&&(identical(other.search, search) || other.search == search));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProductListData&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isLoadMore, isLoadMore) || other.isLoadMore == isLoadMore)&&(identical(other.productsInfo, productsInfo) || other.productsInfo == productsInfo)&&const DeepCollectionEquality().equals(other.products, products)&&(identical(other.order, order) || other.order == order)&&(identical(other.search, search) || other.search == search));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,isLoadMore,skip,limit,total,order,const DeepCollectionEquality().hash(products),search);
+int get hashCode => Object.hash(runtimeType,isLoading,isLoadMore,productsInfo,const DeepCollectionEquality().hash(products),order,search);
 
 @override
 String toString() {
-  return 'ProductListData(isLoading: $isLoading, isLoadMore: $isLoadMore, skip: $skip, limit: $limit, total: $total, order: $order, products: $products, search: $search)';
+  return 'ProductListData(isLoading: $isLoading, isLoadMore: $isLoadMore, productsInfo: $productsInfo, products: $products, order: $order, search: $search)';
 }
 
 
@@ -378,11 +378,11 @@ abstract mixin class $ProductListDataCopyWith<$Res>  {
   factory $ProductListDataCopyWith(ProductListData value, $Res Function(ProductListData) _then) = _$ProductListDataCopyWithImpl;
 @useResult
 $Res call({
- bool isLoading, bool isLoadMore, int skip, int limit, int total, String order, List<Product> products, String? search
+ bool isLoading, bool isLoadMore, ProductGetAllList productsInfo, List<Product> products, String order, String? search
 });
 
 
-
+$ProductGetAllListCopyWith<$Res> get productsInfo;
 
 }
 /// @nodoc
@@ -395,20 +395,27 @@ class _$ProductListDataCopyWithImpl<$Res>
 
 /// Create a copy of ProductListData
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? isLoadMore = null,Object? skip = null,Object? limit = null,Object? total = null,Object? order = null,Object? products = null,Object? search = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? isLoadMore = null,Object? productsInfo = null,Object? products = null,Object? order = null,Object? search = freezed,}) {
   return _then(_self.copyWith(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isLoadMore: null == isLoadMore ? _self.isLoadMore : isLoadMore // ignore: cast_nullable_to_non_nullable
-as bool,skip: null == skip ? _self.skip : skip // ignore: cast_nullable_to_non_nullable
-as int,limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
-as int,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
-as int,order: null == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
-as String,products: null == products ? _self.products : products // ignore: cast_nullable_to_non_nullable
-as List<Product>,search: freezed == search ? _self.search : search // ignore: cast_nullable_to_non_nullable
+as bool,productsInfo: null == productsInfo ? _self.productsInfo : productsInfo // ignore: cast_nullable_to_non_nullable
+as ProductGetAllList,products: null == products ? _self.products : products // ignore: cast_nullable_to_non_nullable
+as List<Product>,order: null == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
+as String,search: freezed == search ? _self.search : search // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
-
+/// Create a copy of ProductListData
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ProductGetAllListCopyWith<$Res> get productsInfo {
+  
+  return $ProductGetAllListCopyWith<$Res>(_self.productsInfo, (value) {
+    return _then(_self.copyWith(productsInfo: value));
+  });
+}
 }
 
 
@@ -490,10 +497,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  bool isLoadMore,  int skip,  int limit,  int total,  String order,  List<Product> products,  String? search)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  bool isLoadMore,  ProductGetAllList productsInfo,  List<Product> products,  String order,  String? search)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProductListData() when $default != null:
-return $default(_that.isLoading,_that.isLoadMore,_that.skip,_that.limit,_that.total,_that.order,_that.products,_that.search);case _:
+return $default(_that.isLoading,_that.isLoadMore,_that.productsInfo,_that.products,_that.order,_that.search);case _:
   return orElse();
 
 }
@@ -511,10 +518,10 @@ return $default(_that.isLoading,_that.isLoadMore,_that.skip,_that.limit,_that.to
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  bool isLoadMore,  int skip,  int limit,  int total,  String order,  List<Product> products,  String? search)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  bool isLoadMore,  ProductGetAllList productsInfo,  List<Product> products,  String order,  String? search)  $default,) {final _that = this;
 switch (_that) {
 case _ProductListData():
-return $default(_that.isLoading,_that.isLoadMore,_that.skip,_that.limit,_that.total,_that.order,_that.products,_that.search);case _:
+return $default(_that.isLoading,_that.isLoadMore,_that.productsInfo,_that.products,_that.order,_that.search);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -531,10 +538,10 @@ return $default(_that.isLoading,_that.isLoadMore,_that.skip,_that.limit,_that.to
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  bool isLoadMore,  int skip,  int limit,  int total,  String order,  List<Product> products,  String? search)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  bool isLoadMore,  ProductGetAllList productsInfo,  List<Product> products,  String order,  String? search)?  $default,) {final _that = this;
 switch (_that) {
 case _ProductListData() when $default != null:
-return $default(_that.isLoading,_that.isLoadMore,_that.skip,_that.limit,_that.total,_that.order,_that.products,_that.search);case _:
+return $default(_that.isLoading,_that.isLoadMore,_that.productsInfo,_that.products,_that.order,_that.search);case _:
   return null;
 
 }
@@ -546,15 +553,12 @@ return $default(_that.isLoading,_that.isLoadMore,_that.skip,_that.limit,_that.to
 
 
 class _ProductListData implements ProductListData {
-  const _ProductListData({this.isLoading = false, this.isLoadMore = false, this.skip = 0, this.limit = 10, this.total = 0, this.order = 'asc', final  List<Product> products = const [], this.search}): _products = products;
+  const _ProductListData({this.isLoading = false, this.isLoadMore = false, required this.productsInfo, final  List<Product> products = const [], this.order = 'asc', this.search}): _products = products;
   
 
 @override@JsonKey() final  bool isLoading;
 @override@JsonKey() final  bool isLoadMore;
-@override@JsonKey() final  int skip;
-@override@JsonKey() final  int limit;
-@override@JsonKey() final  int total;
-@override@JsonKey() final  String order;
+@override final  ProductGetAllList productsInfo;
  final  List<Product> _products;
 @override@JsonKey() List<Product> get products {
   if (_products is EqualUnmodifiableListView) return _products;
@@ -562,6 +566,7 @@ class _ProductListData implements ProductListData {
   return EqualUnmodifiableListView(_products);
 }
 
+@override@JsonKey() final  String order;
 @override final  String? search;
 
 /// Create a copy of ProductListData
@@ -574,16 +579,16 @@ _$ProductListDataCopyWith<_ProductListData> get copyWith => __$ProductListDataCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductListData&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isLoadMore, isLoadMore) || other.isLoadMore == isLoadMore)&&(identical(other.skip, skip) || other.skip == skip)&&(identical(other.limit, limit) || other.limit == limit)&&(identical(other.total, total) || other.total == total)&&(identical(other.order, order) || other.order == order)&&const DeepCollectionEquality().equals(other._products, _products)&&(identical(other.search, search) || other.search == search));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProductListData&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isLoadMore, isLoadMore) || other.isLoadMore == isLoadMore)&&(identical(other.productsInfo, productsInfo) || other.productsInfo == productsInfo)&&const DeepCollectionEquality().equals(other._products, _products)&&(identical(other.order, order) || other.order == order)&&(identical(other.search, search) || other.search == search));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,isLoadMore,skip,limit,total,order,const DeepCollectionEquality().hash(_products),search);
+int get hashCode => Object.hash(runtimeType,isLoading,isLoadMore,productsInfo,const DeepCollectionEquality().hash(_products),order,search);
 
 @override
 String toString() {
-  return 'ProductListData(isLoading: $isLoading, isLoadMore: $isLoadMore, skip: $skip, limit: $limit, total: $total, order: $order, products: $products, search: $search)';
+  return 'ProductListData(isLoading: $isLoading, isLoadMore: $isLoadMore, productsInfo: $productsInfo, products: $products, order: $order, search: $search)';
 }
 
 
@@ -594,11 +599,11 @@ abstract mixin class _$ProductListDataCopyWith<$Res> implements $ProductListData
   factory _$ProductListDataCopyWith(_ProductListData value, $Res Function(_ProductListData) _then) = __$ProductListDataCopyWithImpl;
 @override @useResult
 $Res call({
- bool isLoading, bool isLoadMore, int skip, int limit, int total, String order, List<Product> products, String? search
+ bool isLoading, bool isLoadMore, ProductGetAllList productsInfo, List<Product> products, String order, String? search
 });
 
 
-
+@override $ProductGetAllListCopyWith<$Res> get productsInfo;
 
 }
 /// @nodoc
@@ -611,21 +616,28 @@ class __$ProductListDataCopyWithImpl<$Res>
 
 /// Create a copy of ProductListData
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? isLoadMore = null,Object? skip = null,Object? limit = null,Object? total = null,Object? order = null,Object? products = null,Object? search = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? isLoadMore = null,Object? productsInfo = null,Object? products = null,Object? order = null,Object? search = freezed,}) {
   return _then(_ProductListData(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isLoadMore: null == isLoadMore ? _self.isLoadMore : isLoadMore // ignore: cast_nullable_to_non_nullable
-as bool,skip: null == skip ? _self.skip : skip // ignore: cast_nullable_to_non_nullable
-as int,limit: null == limit ? _self.limit : limit // ignore: cast_nullable_to_non_nullable
-as int,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
-as int,order: null == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
-as String,products: null == products ? _self._products : products // ignore: cast_nullable_to_non_nullable
-as List<Product>,search: freezed == search ? _self.search : search // ignore: cast_nullable_to_non_nullable
+as bool,productsInfo: null == productsInfo ? _self.productsInfo : productsInfo // ignore: cast_nullable_to_non_nullable
+as ProductGetAllList,products: null == products ? _self._products : products // ignore: cast_nullable_to_non_nullable
+as List<Product>,order: null == order ? _self.order : order // ignore: cast_nullable_to_non_nullable
+as String,search: freezed == search ? _self.search : search // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
 
-
+/// Create a copy of ProductListData
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ProductGetAllListCopyWith<$Res> get productsInfo {
+  
+  return $ProductGetAllListCopyWith<$Res>(_self.productsInfo, (value) {
+    return _then(_self.copyWith(productsInfo: value));
+  });
+}
 }
 
 // dart format on

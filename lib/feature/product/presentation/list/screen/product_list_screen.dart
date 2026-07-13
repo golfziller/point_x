@@ -4,6 +4,7 @@ import 'package:point_x/feature/product/presentation/list/controller/product_lis
 import 'package:point_x/feature/product/presentation/list/state/product_list_state.dart';
 import 'package:point_x/feature/product/presentation/list/widgets/main_list.dart';
 import 'package:point_x/shared/widgets/error/error_try_again.dart';
+import 'package:point_x/shared/widgets/initial_loading/initial_loading.dart';
 
 class ProductListScreen extends HookConsumerWidget {
   const ProductListScreen({super.key});
@@ -20,7 +21,7 @@ class ProductListScreen extends HookConsumerWidget {
               ref.invalidate(productListControllerProvider, asReload: true);
             },
           ),
-          initial: () => Center(child: CircularProgressIndicator()),
+          initial: () => InitialLoading(),
           initialized: (data, productCategories, currentProductCategory) =>
               ProductMainList(
                 productListData: data,

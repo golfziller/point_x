@@ -20,13 +20,13 @@ class _ProductClient implements ProductClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<ProductGetAll> getAllList(ProductGetAllRequest query) async {
+  Future<ProductGetAllResponse> getAllList(ProductGetAllRequest query) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.addAll(query.toJson());
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<ProductGetAll>(
+    final _options = _setStreamType<ProductGetAllResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -37,9 +37,9 @@ class _ProductClient implements ProductClient {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ProductGetAll _value;
+    late ProductGetAllResponse _value;
     try {
-      _value = ProductGetAll.fromJson(_result.data!);
+      _value = ProductGetAllResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
@@ -48,13 +48,15 @@ class _ProductClient implements ProductClient {
   }
 
   @override
-  Future<ProductGetAll> searchProductList(ProductGetAllRequest query) async {
+  Future<ProductGetAllResponse> searchProductList(
+    ProductGetAllRequest query,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.addAll(query.toJson());
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<ProductGetAll>(
+    final _options = _setStreamType<ProductGetAllResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -65,9 +67,9 @@ class _ProductClient implements ProductClient {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ProductGetAll _value;
+    late ProductGetAllResponse _value;
     try {
-      _value = ProductGetAll.fromJson(_result.data!);
+      _value = ProductGetAllResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
@@ -76,12 +78,12 @@ class _ProductClient implements ProductClient {
   }
 
   @override
-  Future<ProductDetail> getProduct(String id) async {
+  Future<ProductDetailResponse> getProduct(String id) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<ProductDetail>(
+    final _options = _setStreamType<ProductDetailResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -92,9 +94,9 @@ class _ProductClient implements ProductClient {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ProductDetail _value;
+    late ProductDetailResponse _value;
     try {
-      _value = ProductDetail.fromJson(_result.data!);
+      _value = ProductDetailResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
@@ -135,7 +137,7 @@ class _ProductClient implements ProductClient {
   }
 
   @override
-  Future<ProductGetAll> getProductsByCategory(
+  Future<ProductGetAllResponse> getProductsByCategory(
     String slug,
     ProductGetAllRequest query,
   ) async {
@@ -144,7 +146,7 @@ class _ProductClient implements ProductClient {
     queryParameters.addAll(query.toJson());
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<ProductGetAll>(
+    final _options = _setStreamType<ProductGetAllResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -155,9 +157,9 @@ class _ProductClient implements ProductClient {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ProductGetAll _value;
+    late ProductGetAllResponse _value;
     try {
-      _value = ProductGetAll.fromJson(_result.data!);
+      _value = ProductGetAllResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;

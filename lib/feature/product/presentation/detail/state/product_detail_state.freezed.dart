@@ -55,12 +55,11 @@ extension ProductDetailStatePatterns on ProductDetailState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Loading value)?  loading,TResult Function( _Error value)?  error,TResult Function( _ProductDetailState value)?  initialized,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Error value)?  error,TResult Function( _ProductDetailState value)?  initialized,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial(_that);case _Loading() when loading != null:
-return loading(_that);case _Error() when error != null:
+return initial(_that);case _Error() when error != null:
 return error(_that);case _ProductDetailState() when initialized != null:
 return initialized(_that);case _:
   return orElse();
@@ -80,12 +79,11 @@ return initialized(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Loading value)  loading,required TResult Function( _Error value)  error,required TResult Function( _ProductDetailState value)  initialized,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Error value)  error,required TResult Function( _ProductDetailState value)  initialized,}){
 final _that = this;
 switch (_that) {
 case _Initial():
-return initial(_that);case _Loading():
-return loading(_that);case _Error():
+return initial(_that);case _Error():
 return error(_that);case _ProductDetailState():
 return initialized(_that);case _:
   throw StateError('Unexpected subclass');
@@ -104,12 +102,11 @@ return initialized(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Loading value)?  loading,TResult? Function( _Error value)?  error,TResult? Function( _ProductDetailState value)?  initialized,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Error value)?  error,TResult? Function( _ProductDetailState value)?  initialized,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial(_that);case _Loading() when loading != null:
-return loading(_that);case _Error() when error != null:
+return initial(_that);case _Error() when error != null:
 return error(_that);case _ProductDetailState() when initialized != null:
 return initialized(_that);case _:
   return null;
@@ -128,11 +125,10 @@ return initialized(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function()?  error,TResult Function( Product products)?  initialized,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  error,TResult Function( Product products)?  initialized,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial();case _Loading() when loading != null:
-return loading();case _Error() when error != null:
+return initial();case _Error() when error != null:
 return error();case _ProductDetailState() when initialized != null:
 return initialized(_that.products);case _:
   return orElse();
@@ -152,11 +148,10 @@ return initialized(_that.products);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function()  error,required TResult Function( Product products)  initialized,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  error,required TResult Function( Product products)  initialized,}) {final _that = this;
 switch (_that) {
 case _Initial():
-return initial();case _Loading():
-return loading();case _Error():
+return initial();case _Error():
 return error();case _ProductDetailState():
 return initialized(_that.products);case _:
   throw StateError('Unexpected subclass');
@@ -175,11 +170,10 @@ return initialized(_that.products);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function()?  error,TResult? Function( Product products)?  initialized,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  error,TResult? Function( Product products)?  initialized,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial();case _Loading() when loading != null:
-return loading();case _Error() when error != null:
+return initial();case _Error() when error != null:
 return error();case _ProductDetailState() when initialized != null:
 return initialized(_that.products);case _:
   return null;
@@ -213,38 +207,6 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'ProductDetailState.initial()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
-class _Loading implements ProductDetailState {
-  const _Loading();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loading);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'ProductDetailState.loading()';
 }
 
 

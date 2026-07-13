@@ -1,18 +1,19 @@
 import 'package:intl/intl.dart';
 
+// ex: 1500 -> 1,500
 String formatPrice(num price) {
   final formatter = NumberFormat('#,###');
-  return formatter.format(price); // ตัวอย่าง: 1500 -> 1,500
+  return formatter.format(price);
 }
 
-// แบบที่ 2: ใส่ Comma และล็อกทศนิยม 2 ตำแหน่งเป๊ะๆ
+// ex: 1500 -> 1,500.00
 String formatPriceWithDecimal(num price) {
   final formatter = NumberFormat('#,##0.00');
-  return formatter.format(price); // ตัวอย่าง: 1500 -> 1,500.00
+  return formatter.format(price);
 }
 
-// แบบที่ 3: ใส่สกุลเงินดอลลาร์ $ นำหน้าอัตโนมัติ
+// ex: 1500.00 -> $1,500.00
 String formatCurrency(num price) {
   final formatter = NumberFormat.currency(symbol: '\$', decimalDigits: 2);
-  return formatter.format(price); // ตัวอย่าง: 1500 -> $1,500
+  return formatter.format(price);
 }

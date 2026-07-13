@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:point_x/core/constant/product/product_constant.dart';
+import 'package:point_x/shared/widgets/common/ui_helper.dart';
 
 class NotFound extends StatelessWidget {
   const NotFound({super.key});
@@ -11,7 +13,6 @@ class NotFound extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // 1. เลือกใช้ไอคอนที่เหมาะสม
             Icon(
               Icons.search_off_rounded,
               size: 72,
@@ -19,28 +20,18 @@ class NotFound extends StatelessWidget {
                 context,
               ).colorScheme.onSecondaryFixed.withValues(alpha: 0.3),
             ),
-            const SizedBox(height: 16),
+            verticalSpaceSmall,
 
-            // 2. ข้อความหัวข้อหลัก
-            const Text(
-              'Product Not Found',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF2D3142),
-              ),
+            Text(
+              ProductConstant.lbProductNotFound,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
-            const SizedBox(height: 8),
+            verticalSpaceTiny,
 
-            // 3. ข้อความแนะนำผู้ใช้ (UX Microcopy)
-            const Text(
-              'We couldn\'t find any products matching your search. Please try check your spelling or try another keyword.',
+            Text(
+              ProductConstant.lbProductNotFoundDesc,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.black45,
-                height: 1.4,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
         ),

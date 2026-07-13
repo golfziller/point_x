@@ -7,7 +7,7 @@ part 'product_get_all_request.g.dart';
 abstract class ProductGetAllRequest with _$ProductGetAllRequest {
   const factory ProductGetAllRequest({
     @Default("asc") String order,
-    @Default(10) int limit,
+    @Default(20) int limit,
     required int skip,
     @Default('title') String sortBy,
     @Default("title,price,description,rating,images,id") String select,

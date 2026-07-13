@@ -68,7 +68,7 @@ final class SearchProductListUseCaseProvider
 }
 
 String _$searchProductListUseCaseHash() =>
-    r'c09c0e4c1566676a942f6b2f634763ae7c02de29';
+    r'0b2675fa46e071eb1c55198ccb7ebb27f48cb792';
 
 final class SearchProductListUseCaseFamily extends $Family
     with

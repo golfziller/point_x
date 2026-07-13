@@ -214,7 +214,7 @@ return $default(_that.order,_that.limit,_that.skip,_that.sortBy,_that.select,_th
 @JsonSerializable()
 
 class _ProductGetAllRequest implements ProductGetAllRequest {
-  const _ProductGetAllRequest({this.order = "asc", this.limit = 10, required this.skip, this.sortBy = 'title', this.select = "title,price,description,rating,images,id", this.q = ''});
+  const _ProductGetAllRequest({this.order = "asc", this.limit = 20, required this.skip, this.sortBy = 'title', this.select = "title,price,description,rating,images,id", this.q = ''});
   factory _ProductGetAllRequest.fromJson(Map<String, dynamic> json) => _$ProductGetAllRequestFromJson(json);
 
 @override@JsonKey() final  String order;
