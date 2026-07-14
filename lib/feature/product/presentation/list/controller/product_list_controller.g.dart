@@ -42,7 +42,7 @@ final class ProductListControllerProvider
 }
 
 String _$productListControllerHash() =>
-    r'c038599e35e3a66495cd0451728c7c9a8e3e015b';
+    r'f69cce48767dc39d8d510fa605a4fb8fc9d7fc64';
 
 abstract class _$ProductListController extends $Notifier<ProductListState> {
   ProductListState build();
